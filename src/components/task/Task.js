@@ -34,7 +34,6 @@ const Task = ({item, index, moveItem, status}) => {
     const [{isDragging}, drag] = useDrag({
         type:ITEM_TYPE,
         item:{
-
             ...item,
             index,
         },

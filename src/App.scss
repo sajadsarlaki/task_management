@@ -4,11 +4,10 @@ $complete-color: #27aa80;
 $text-color: #172b4d;
 $disabled-color: #fad6d6;
 $background-color: #f5eaea;
-
+$linear-bg: linear-gradient(90deg, rgba(20,20,20,50) 0%, rgba(40,40,40,70) 46%, rgba(60,60,60,60) 100%);
 
 html {
-  background: rgb(0,73,191);
-  background: linear-gradient(90deg, rgba(0,73,191,1) 0%, rgba(190,190,255,1) 46%, rgba(0,212,255,1) 100%);
+  background: $linear-bg
 }
 
 body {
@@ -24,73 +23,52 @@ a {
 }
 
 p {
-  margin: 10px 0;
+  margin: 0.5rem 0;
   overflow-wrap: break-word;
   text-align: left;
 }
 
 #root{
-    height: 100vh;
-    background-color: #333333;
+  background: $linear-bg;
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-areas:
     "header header header"
-    "sidebar content content";
+    "sidebar content content"
+    "sidebar  ......  .......";
     color: #444;
 }
 .header{
   grid-area: header;
   grid-row: 1;
-  border: 1px solid #777;
+  //border: 1px solid #777;
 
 }
 
-.content {
+.content{
   grid-area: content;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border: 1px solid #777;
+  //border: 1px solid #777;
+  &__add-btn{
+    width: 4rem;
+    height: 4rem;
+  }
+
 }
 
 .sidebar{
   grid-area: sidebar;
   border: 1px solid #777;
+  height: 70vh;
 }
 
 
 label {
-  font-size: 16px;
+  font-size: 1rem;
   display: block;
-}
-
-button, input {
-  padding: 4px;
-  border: 1px solid $disabled-color;
-}
-
-button {
-  outline: none;
-  background: transparent;
-  border-radius: 5px;
-  color: $primary-color;
-  transition: all ease 0.8s;
-  cursor: pointer;
-}
-
-button.active {
-  color: $primary-color;
-}
-
-button.active:after {
-  content: "";
-  display: block;
-  margin: 0 auto;
-  width: 50%;
-  padding-top: 4px;
-  border-bottom: 1px solid $primary-color;
 }
 
 input:focus {
@@ -105,10 +83,10 @@ select {
 
 
 .item {
-  font-size: 15px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
   z-index: 1;
   background-color: white;
   &:hover{
@@ -116,7 +94,7 @@ select {
   }
   &__title{
     font-weight: 600;
-    font-size: 16px;
+    font-size: 0.8rem;
   }
   &__status{
     text-align: right;
@@ -139,6 +117,7 @@ select {
   flex: 1 25%;
   width: 100%;
   height: 100%;
+  border: 1px solid red;
 }
 
 .col-wrapper {
@@ -148,6 +127,7 @@ select {
   padding: 20px;
   background-color: $background-color;
   border-radius: 5px;
+  min-width: 250px;
   &__col-header{
     font-size: 20px;
     font-weight: 600;

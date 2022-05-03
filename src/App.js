@@ -10,7 +10,9 @@ const App = () => {
     <DndProvider backend={HTML5Backend}>
             <Header />
             <Container />
-      <div className={'sidebar'}>fekfoek</div>
+             <div className={'sidebar'}>
+                fekfoek
+             </div>
 
     </DndProvider>
     )

@@ -23,11 +23,26 @@ const Container = () => {
             return[...newItems]
         })
     }
+
+    const addNewItem = () => {
+        const lastId = items[items.length - 1].id
+        const newTask = {
+            id: lastId + 1,
+                icon: "⭕️",
+            status: "open",
+            title: "Daily reading",
+            content: "Finish reading Intro to UI/UX"
+        }
+        setItems([...items,newTask])
+    }
     return(
         <div className="content">
+            <button className={'content__add-btn'} onClick={addNewItem}>
+                Click to add
+            </button>
             {statuses.map(s=>{
                 return(
-                    <div key={status} className={'col-wrapper'}>
+                    <div key={s.status } className={'col-wrapper'}>
                         <h2 className={'col-wrapper__header'}>{s.status.toUpperCase()}</h2>
                         <DropWrapper onDrop={onDrop} status={s.status}>
                             <Column>
@@ -36,9 +51,11 @@ const Container = () => {
                                     )}
                             </Column>
                         </DropWrapper>
+
                     </div>
                 )
             })}
+
         </div>
     )
 }

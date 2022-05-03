@@ -5,7 +5,6 @@ const Column = ({isOver, children}) => {
         <div className="column">
             {children}
         </div>
-
     )
 }
 
