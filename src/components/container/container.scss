@@ -1,0 +1,16 @@
+.page{
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 10px 10px;
+  border: 1px solid red;
+  height: 100vh;
+}
+.page__mainPanel{
+  border: solid 1px #000;
+}
+.page__leftSidebar{
+  border: solid 1px #000;
+}
+.page__rightSidebar{
+  border: solid 1px #000;
+}
