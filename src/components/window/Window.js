@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import Modal from 'react-modal';
 import '../../App.scss'
-
+import Label from "../labels/Labels";
 Modal.setAppElement('#root');
+
+
+
 const Window = ({show, onClose, item})=>{
+    const [showLabelsModal, setShowLabelsModal] = useState(false);
+    const onLabelsModalOpen = () => setShowLabelsModal(true);
+    const onLabelsModalClose = () => setShowLabelsModal(false);
     return(
         <Modal
             isOpen = {show}
@@ -11,7 +17,7 @@ const Window = ({show, onClose, item})=>{
             className={"modal"}
             overlayClassName={'overlay'}
         >
-            <div className="close-btn-ctn">
+            <div className="close-btn-ctn" id={'btn'}>
                 <h1 style={{flex:"1 90%"}}> {item.title}</h1>
                 <button className={"closed-btn"} onClick={onClose}>X</button>
             </div>
@@ -21,8 +27,18 @@ const Window = ({show, onClose, item})=>{
                 <h2>{item.status}</h2>
                 <p>{item.icon}{`${item.status.charAt(0).toUpperCase()}${item.status.slice(1)}`}</p>
             </div>
+            <button onClick={onLabelsModalOpen}>
+                labels
+            </button>
+            <Label
+                item={item}
+                onLabelsModalClose={onLabelsModalClose}
+                showLabels={showLabelsModal}
+            />
 
         </Modal>
+
+
     )
 }
 

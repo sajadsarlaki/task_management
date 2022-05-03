@@ -45,7 +45,6 @@ const Task = ({item, index, moveItem, removeItem, status}) => {
 
     const onOpen = () => setShow(true);
     const onClose = () => setShow(false);
-
     drag(drop(ref));
 
 
