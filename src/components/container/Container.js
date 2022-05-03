@@ -24,6 +24,12 @@ const Container = () => {
         })
     }
 
+    const removeItem = (id) => {
+        const newItems = items.filter(i => i.id !== id)
+        setItems(
+            [...newItems]
+        )
+    }
     const addNewItem = () => {
         const lastId = items[items.length - 1].id
         const newTask = {
@@ -47,7 +53,7 @@ const Container = () => {
                         <DropWrapper onDrop={onDrop} status={s.status}>
                             <Column>
                                 {items.filter(i => i.status === s.status)
-                                    .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={s.status}/>
+                                    .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={s.status} removeItem={removeItem}/>
                                     )}
                             </Column>
                         </DropWrapper>
