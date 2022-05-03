@@ -2,7 +2,7 @@ import React, {Fragment, useState, useRef}  from "react";
 import {useDrag, useDrop} from 'react-dnd';
 import Window from '../window/Window';
 import ITEM_TYPE from '../../data/types'
-const Task = ({item, index, moveItem, removeItem, status}) => {
+const Task = ({item, index, moveItem, removeItem, status, updateItem}) => {
     const ref = useRef(null);
     const [, drop] = useDrop({
         accept: ITEM_TYPE,
@@ -60,15 +60,19 @@ const Task = ({item, index, moveItem, removeItem, status}) => {
                 <h3 className="item__content">{item.content}</h3>
                     <p className="item__status">{item.icon}</p>
                 </div>
-                <button onClick={()=>removeItem(item.id)}>
-                    remove
-                </button>
+                <p> {item.labels}
+                    <button onClick={()=>removeItem(item.id)}>
+                        remove
+                    </button>
+                </p>
+
             </div>
 
             <Window
                 item={item}
                 onClose={onClose}
                 show={show}
+                updateItem={updateItem}
             />
         </Fragment>
 

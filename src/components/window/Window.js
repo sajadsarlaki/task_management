@@ -6,7 +6,7 @@ Modal.setAppElement('#root');
 
 
 
-const Window = ({show, onClose, item})=>{
+const Window = ({show, onClose, item, updateItem})=>{
     const [showLabelsModal, setShowLabelsModal] = useState(false);
     const onLabelsModalOpen = () => setShowLabelsModal(true);
     const onLabelsModalClose = () => setShowLabelsModal(false);
@@ -34,6 +34,7 @@ const Window = ({show, onClose, item})=>{
                 item={item}
                 onLabelsModalClose={onLabelsModalClose}
                 showLabels={showLabelsModal}
+                updateItem={updateItem}
             />
 
         </Modal>

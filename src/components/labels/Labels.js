@@ -3,10 +3,10 @@ import Modal from 'react-modal';
 // This holds a list of some fiction people
 // Some  have the same name but different age and id
 const labels = [
-    { id: 1, name: 'Andy',  },
-    { id: 2, name: 'Bob',  },
-    { id: 3, name: 'Tom Hulk' },
-    { id: 4, name: 'Tom Hank' },
+    { id: 1, name: 'Andy', color:'#fd2'  },
+    { id: 2, name: 'Bob',  color:'#900'},
+    { id: 3, name: 'Tom Hulk', color:'#090'},
+    { id: 4, name: 'Tom Hank', color:'#009' },
     { id: 5, name: 'Audra',  },
     { id: 6, name: 'Anna',  },
     { id: 7, name: 'Tom' },
@@ -14,7 +14,7 @@ const labels = [
     { id: 9, name: 'Bolo' },
 ];
 
-function Label({item, onLabelsModalClose, showLabels}) {
+function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     // the value of the search field
     const [name, setName] = useState('');
 
@@ -38,29 +38,40 @@ function Label({item, onLabelsModalClose, showLabels}) {
         setName(keyword);
     };
 
+    const addLabelToItems = (labelItem) => {
+        const newItem = item;
+        newItem.labels = labelItem.name;
+        updateItem(newItem)
+        onLabelsModalClose()
+    }
+
     return (
         <Modal
             isOpen = {showLabels}
             onRequestClosed = {onLabelsModalClose}
-            className={"modal"}
+            className={"label-modal"}
             overlayClassName={'overlay'}
         >
-        <div className="container">
+        <div className="label-modal__content">
             <input
                 type="search"
                 value={name}
                 onChange={filter}
-                className="input"
+                className="label-modal__input"
                 placeholder="Filter"
             />
 
-            <div className="label-list">
+            <div className="label-modal__list">
                 {foundLabels && foundLabels.length > 0 ? (
-                    foundLabels.map((user) => (
-                        <li key={user.id} className="user">
-                            <span className="user-id">{user.id}</span>
-                            <span className="user-name">{user.name}</span>
-                        </li>
+                    foundLabels.map((labelItem) => (
+                        <div
+                            key={labelItem.id}
+                            className="label-modal__item"
+                            style={{backgroundColor:labelItem.color}}
+                            onClick={() => addLabelToItems(labelItem)}
+                        >
+                          {labelItem.name}
+                        </div>
                     ))
                 ) : (
                     <h1>No results found!</h1>

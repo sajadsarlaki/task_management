@@ -192,3 +192,33 @@ select {
 .close-btn:hover {
   background-color: #DCDCDC;
 }
+
+.label-modal{
+  background-color: #fff;
+  justify-content: space-evenly;
+  border-radius: .05rem;
+  margin: 3rem ;
+  min-height: 5rem;
+  width: 15rem;
+  outline: none;
+  padding: 1rem;
+  &__content{
+    display: flex;
+    flex-direction: column;
+  }
+  &__input{
+    height: 3rem;
+  }
+  &__item{
+    text-align: center;
+    padding: .7rem;
+    margin: 0.2rem 0;
+    color: #fff;
+    &:hover{
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: .5rem;
+
+    }
+  }
+}

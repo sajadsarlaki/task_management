@@ -5,6 +5,25 @@ import Column from "../column/Column";
 import {data, statuses} from '../../data/dataset'
 const Container = () => {
     const [items, setItems] = useState(data);
+    const updateItem = (updatedItem) => {
+        let index;
+        for (let i = 0; i<items.length;i++){
+            if (items[i].id === updatedItem.id)
+                index = i;
+        }
+        console.log(index)
+
+        setItems( prevState => {
+
+            const newItems = prevState;
+            newItems.splice(index,1,updatedItem);
+            return [...newItems]
+        })
+
+    }
+
+
+
     const onDrop = (item, monitor, status) => {
         const mapping = statuses.find(si => si.status === status);
         setItems(prevState => {
@@ -53,7 +72,7 @@ const Container = () => {
                         <DropWrapper onDrop={onDrop} status={s.status}>
                             <Column>
                                 {items.filter(i => i.status === s.status)
-                                    .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={s.status} removeItem={removeItem}/>
+                                    .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={s.status} removeItem={removeItem} updateItem={updateItem}/>
                                     )}
                             </Column>
                         </DropWrapper>
