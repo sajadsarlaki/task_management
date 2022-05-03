@@ -1,5 +1,4 @@
 import React, {Fragment, useState, useRef}  from "react";
-import '../../App.scss'
 import {useDrag, useDrop} from 'react-dnd';
 import Window from '../window/Window';
 import ITEM_TYPE from '../../data/types'
@@ -59,7 +58,7 @@ const Task = ({item, index, moveItem, status}) => {
                 className={'item'}
                 onClick={onOpen}
             >
-                <div className="item__colorBar" style={{backgroundColor: status.backgroundColor}}>
+                <div className="item__color-bar" style={{backgroundColor: status.backgroundColor}}>
                 <h3 className="item__content">{item.content}</h3>
                     <p className="item__status">{item.icon}</p>
                 </div>

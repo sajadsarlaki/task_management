@@ -1,5 +1,4 @@
 import React from "react";
-import '../../App.scss'
 import {useDrop} from "react-dnd";
 import ITEM_TYPE from "../../data/types";
 import {statuses} from '../../data/dataset'

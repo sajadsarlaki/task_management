@@ -1,5 +1,4 @@
 import React  from "react";
-import '../../App.scss'
 const Column = ({isOver, children}) => {
     const className = isOver ? "highlight-region":"";
     return(

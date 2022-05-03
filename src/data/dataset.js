@@ -40,7 +40,8 @@ const statuses = [{
     status: "done",
     icon: "✅",
     color: "#3981DE"
-}];
+}
+];
 
 
 export { data, statuses };

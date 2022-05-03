@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import './container.scss'
-import '../../App.scss'
 import Task from "../task/Task";
 import DropWrapper from "../dropWrapper/DropWrapper";
 import Column from "../column/Column";
@@ -26,11 +24,11 @@ const Container = () => {
         })
     }
     return(
-        <div className="row">
+        <div className="content">
             {statuses.map(s=>{
                 return(
                     <div key={status} className={'col-wrapper'}>
-                        <h2 className={'col-header'}>{s.status.toUpperCase()}</h2>
+                        <h2 className={'col-wrapper__header'}>{s.status.toUpperCase()}</h2>
                         <DropWrapper onDrop={onDrop} status={s.status}>
                             <Column>
                                 {items.filter(i => i.status === s.status)
