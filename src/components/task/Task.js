@@ -59,8 +59,15 @@ const Task = ({item, index, moveItem, removeItem, status, updateItem}) => {
                 <div className="item__color-bar" style={{backgroundColor: status.backgroundColor}}>
                 <h3 className="item__content">{item.content}</h3>
                     <p className="item__status">{item.icon}</p>
+
+                    {item.labels ?
+                        item.labels.map(i=><span className={'label-span'} style={{backgroundColor:i.color}}>{i.name}</span>):""}
+
                 </div>
-                <p> {item.labels}
+
+
+                <p>
+
                     <button onClick={()=>removeItem(item.id)}>
                         remove
                     </button>

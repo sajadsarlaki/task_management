@@ -3,7 +3,8 @@ const data = [{
     icon: "⭕️",
     status: "open",
     title: "Human Interest Form",
-    content: "Fill out human interest distribution form"
+    content: "Fill out human interest distribution form",
+    labels:[]
 }, {
     id: 2,
     icon: "⭕️",

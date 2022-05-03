@@ -14,7 +14,6 @@ const Container = () => {
         console.log(index)
 
         setItems( prevState => {
-
             const newItems = prevState;
             newItems.splice(index,1,updatedItem);
             return [...newItems]

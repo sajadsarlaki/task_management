@@ -26,6 +26,11 @@ const Window = ({show, onClose, item, updateItem})=>{
                 <p>{item.content}</p>
                 <h2>{item.status}</h2>
                 <p>{item.icon}{`${item.status.charAt(0).toUpperCase()}${item.status.slice(1)}`}</p>
+                <div className={'label_content'}>
+                    {item.labels ?
+                        item.labels.map(i=><span className={'label-span'} style={{backgroundColor:i.color}}>{i.name}</span>):""}
+                </div>
+
             </div>
             <button onClick={onLabelsModalOpen}>
                 labels

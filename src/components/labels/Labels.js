@@ -40,7 +40,7 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
 
     const addLabelToItems = (labelItem) => {
         const newItem = item;
-        newItem.labels = labelItem.name;
+        newItem.labels.push(labelItem);
         updateItem(newItem)
         onLabelsModalClose()
     }
