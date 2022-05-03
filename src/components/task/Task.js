@@ -1,23 +1,81 @@
-import React from 'react'
-import './task.scss'
-import { Draggable } from 'react-beautiful-dnd'
+import React, {Fragment, useState, useRef}  from "react";
+import '../../App.scss'
+import {useDrag, useDrop} from 'react-dnd';
+import Window from '../window/Window';
+import ITEM_TYPE from '../../data/types'
+const Task = ({item, index, moveItem, status}) => {
+    const ref = useRef(null);
+    const [, drop] = useDrop({
+        accept: ITEM_TYPE,
+        hover(item, monitor){
+            if (!ref.current)
+                return
+            const dragIndex = item.index;
+            const hoverIndex = index;
 
-function Task(props) {
-    return (
-        <Draggable draggableId={props.task.id} index={props.index}>
-            {(provided, snapshot) => (
-                <div
-                    className={'task'}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                    isDragging={snapshot.isDragging}
-                >
-                    {props.task.content}
+            if (dragIndex === hoverIndex)
+                return;
+
+            const hoverRect = ref.current.getBoundingClientRect();
+            const hoverMiddleY = (hoverRect.bottom - hoverRect.top)/2;
+            const mousePosition = monitor.getClientOffset();
+            const hoverClientY = mousePosition.y - hoverRect.top;
+
+            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY){
+                return;
+            }
+
+            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY){
+                return;
+            }
+            moveItem(dragIndex, hoverIndex);
+            item.index = hoverIndex
+        }
+    });
+    const [{isDragging}, drag] = useDrag({
+        type:ITEM_TYPE,
+        item:{
+
+            ...item,
+            index,
+        },
+        collect: monitor => ({
+            isDragging: monitor.isDragging()
+        })
+    })
+    const [show, setShow] = useState(false);
+
+    const onOpen = () => setShow(true);
+    const onClose = () => setShow(false);
+
+    drag(drop(ref));
+
+
+    return(
+        <Fragment>
+            <div
+                ref={ref}
+                style={{opacity: isDragging? 0:1}}
+                className={'item'}
+                onClick={onOpen}
+            >
+                <div className="item__colorBar" style={{backgroundColor: status.backgroundColor}}>
+                <h3 className="item__content">{item.content}</h3>
+                    <p className="item__status">{item.icon}</p>
                 </div>
-            )}
-        </Draggable>
+            </div>
+
+            <Window
+                item={item}
+                onClose={onClose}
+                show={show}
+            />
+        </Fragment>
+
+
+
+
     )
 }
 
-export default Task
+export default Task;
