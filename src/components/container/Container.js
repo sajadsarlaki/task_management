@@ -135,7 +135,6 @@ const Container = () => {
             {theColumns.map(col=>{
                 return(
                     <div key={col.status } className={'col-wrapper'}>
-                        <h2 className={'col-wrapper__header'}>{col.status.toUpperCase()}</h2>
                         <DropWrapper onDrop={onDrop} status={col.status} deleteColumn={deleteColumn} >
                             <Column>
                                 {items.filter(i => i.status === col.status)
