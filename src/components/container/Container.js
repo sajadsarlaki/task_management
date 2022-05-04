@@ -10,7 +10,7 @@ const Container = () => {
     // task
     const [items, setItems] = useState(tempTasks);
     // statuses
-    const [itemsColumn, setItemsColumn] = useState(tempStatuses);
+    const [theColumns, setTheColumns] = useState(tempStatuses);
 
     // saving data whenever tasks changes
     useEffect(() => {
@@ -21,8 +21,8 @@ const Container = () => {
     }, [items]);
     // saving data whenever tasks changes
     useEffect(() => {
-        localStorage.setItem('columns', JSON.stringify(itemsColumn));
-    }, [itemsColumn]);
+        localStorage.setItem('columns', JSON.stringify(theColumns));
+    }, [theColumns]);
 
 
     // loading tasks form local storage into state
@@ -47,7 +47,7 @@ const Container = () => {
         console.log('reading => ', itemsColumn)
         if (statuses.length) {
             console.log(itemsColumn)
-            setItemsColumn(itemsColumn);
+            setTheColumns(itemsColumn);
         }
     }, []);
 
@@ -68,7 +68,7 @@ const Container = () => {
 
     }
     const onDrop = (item, monitor, status) => {
-        const mapping = itemsColumn.find(si => si.status === status);
+        const mapping = theColumns.find(si => si.status === status);
         setItems(prevState => {
             const newItems = prevState
                 .filter(i => i.id !== item.id)
@@ -111,14 +111,19 @@ const Container = () => {
 
     const addItemsColumn = () => {
         const newCol ={
-            status: `done + ${Math.floor(Math.random()*5)}`,
+            status: `done4 + ${Math.floor(Math.random()*5)}`,
             icon: "✅",
             color: "#3981DE"
         }
-        setItemsColumn(prevState => [...prevState.concat(newCol)])
-        console.log(itemsColumn)
+        if (!theColumns.filter(i => i.status === newCol.status).length)
+            setTheColumns(prevState => [...prevState.concat(newCol)])
+        else {
+            alert('sorry')
+        }
     }
-
+    const deleteColumn = (status) => {
+        setTheColumns([...theColumns.filter(i=>i.status !== status)]);
+    }
     return(
         <div className="content">
             <button className={'content__add-btn'} onClick={addNewItem}>
@@ -128,11 +133,11 @@ const Container = () => {
             <button className={'content__add-btn'} onClick={addItemsColumn}>
                 Click to add column
             </button>
-            {itemsColumn.map(col=>{
+            {theColumns.map(col=>{
                 return(
                     <div key={col.status } className={'col-wrapper'}>
                         <h2 className={'col-wrapper__header'}>{col.status.toUpperCase()}</h2>
-                        <DropWrapper onDrop={onDrop} status={col.status}>
+                        <DropWrapper onDrop={onDrop} status={col.status} deleteColumn={deleteColumn} >
                             <Column>
                                 {items.filter(i => i.status === col.status)
                                     .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={col.status} removeItem={removeItem} updateItem={updateItem}/>

@@ -4,7 +4,7 @@ import ITEM_TYPE from "../../data/types";
 import {statuses} from '../../data/dataset'
 
 
-const DropWrapper = ({ onDrop, children, status }) => {
+const DropWrapper = ({ onDrop, children, status, deleteColumn }) => {
     const [{ isOver }, drop] = useDrop({
         accept: ITEM_TYPE,
         canDrop: (item, monitor) => {
@@ -23,6 +23,7 @@ const DropWrapper = ({ onDrop, children, status }) => {
 
     return (
         <div ref={drop} className={"drop-wrapper"}>
+            <button onClick={() => deleteColumn(status)}>delete me</button>
             {React.cloneElement(children, { isOver })}
         </div>
     )
