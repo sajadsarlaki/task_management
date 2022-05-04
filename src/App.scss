@@ -28,18 +28,21 @@ p {
   text-align: left;
 }
 
-.root{
+#root{
   background: $linear-bg;
-    //display: grid;
-    //grid-gap: 10px;
-    //grid-template-columns: 1fr 4fr 1fr;
-    //grid-template-areas:
-    //"header header header"
-    //"sidebar content content"
-    //"sidebar  ......  .......";
-    //color: #444;
+  display: flex;
+  flex-direction: column;
 
   overflow-x: scroll;
+}
+.sidebar{
+  min-width: 15rem;
+  border: 1px solid #777;
+  height: 70vh;
+}
+.middle{
+  display: flex;
+  flex-direction: row;
 }
 .header{
   grid-area: header;
@@ -47,7 +50,6 @@ p {
   //border: 1px solid #777;
 
 }
-
 .content{
   grid-area: content;
   display: flex;
@@ -61,14 +63,7 @@ p {
 
 }
 
-.sidebar{
-  grid-area: sidebar;
-  border: 1px solid #777;
-  height: 70vh;
-}
-
-
-label {
+.label {
   font-size: 1rem;
   display: block;
 }
@@ -83,20 +78,32 @@ select {
 }
 
 
+.col-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+  background-color: $background-color;
+  border-radius: 5px;
+  min-width: 15rem;
+  &__col-header{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+}
 
 .item {
   display: flex;
   flex-direction: column;
-
-;
-
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
   z-index: 1;
   background-color: white;
-  max-width: 20rem;
+  width: 14rem;
 
   &:hover{
     cursor: pointer;
@@ -105,28 +112,35 @@ select {
 
   }
   &__title{
-    grid-area: title;
     font-weight: 600;
     font-size: 0.8rem;
   }
   &__status{
-    grid-area: status;
     text-align: right;
   }
   &__label-section{
-    grid-area: labels;
-    padding-top: .5rem;
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: repeat(2,1fr) ;
+    padding-top:.5rem;
+
   }
   &__label-span{
-    padding: 0.1rem;
+    display: inline-block;
+    padding: 0.1rem 0.3rem;
+    margin: 0.1rem 0.2rem;
     border-radius: .5rem;
     text-align: center;
+    color: white;
   }
   &__dl-btn{
-    grid-area: dlbtn;
+    background-color: white;
+    border: 1px solid #fff;
+    color: #999999;
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.2);
+      border:1px solid red;
+      transition: transform 150ms;
+    }
+
   }
   &__footer{
     display: flex;
@@ -148,21 +162,7 @@ select {
   height: 100%;
 }
 
-.col-wrapper {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  padding: 20px;
-  background-color: $background-color;
-  border-radius: 5px;
-  //min-width: 250px;
-  &__col-header{
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-top: 0;
-  }
-}
+
 
 .col {
   min-height: 300px;
@@ -187,11 +187,44 @@ select {
 .modal {
   background-color: #F4F5F7;
   border-radius: 2px;
-  margin: 48px 0 80px;
-  min-height: 450px;
-  width: 800px;
-  outline: none;
+  margin: 4rem 2rem;
+  //min-height: 450px;
+  width: 40rem;
+  outline:none;
   padding: 20px;
+  &__header{
+    display: flex;
+    flex-direction: row;
+  }
+  &__content{
+    display: flex ;
+    flex-direction: column;
+  }
+  &__desc{
+    padding-left: 2.4rem;
+  }
+  &__status{
+    padding-left: 2.2rem;
+  }
+  &__label-span{
+    padding: .4rem .2rem;
+    border-radius: .2rem;
+    margin: 0.2rem;
+  }
+  &__label-labels{
+    padding-left: 2.4rem;
+    display: flex;
+    flex-direction: row;
+    color: white;
+  }
+  &__label--add{
+    color: #555;
+    border: 1px solid $complete-color;
+    padding: .4rem .2rem;
+    border-radius: .2rem;
+    margin: 0.2rem;
+    cursor: pointer;
+  }
 }
 
 .overlay {
@@ -251,11 +284,7 @@ select {
   }
 }
 
-.label-span{
-  padding: .4rem .2rem;
-  border-radius: .2rem;
-  margin: 0.2rem;
-}
+
 .label_content{
   margin: 2rem 0rem;
 

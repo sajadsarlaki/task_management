@@ -46,7 +46,7 @@ const statuses = [{
 
 const labels = [
     { name: 'Andy', color:'#fd2'  },
-    { name: 'Bob',  color:'#900'},
+    { name: 'Bob',  color:'red'},
     { name: 'Tom Hulk', color:'#090'},
     { name: 'Tom Hank', color:'#009' },
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-modal';
 // This holds a list of some fiction people
 // Some  have the same name but different age and id
@@ -28,6 +28,9 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
 
     const addLabelToItems = (labelItem) => {
         const newItem = item;
+        if (!newItem.labels)
+            newItem.labels = [];
+
         if(item.labels.includes(labelItem)){
             onLabelsModalClose()
             return
@@ -39,14 +42,15 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     }
 
     const addNewLabel = () => {
-        let newLabel = { id:10, name: 'kos', color:'pink'  }
-        setFoundLabels([...foundLabels.concat(newLabel)])
-
+        let newLabel = { name: 'fe', color:'red'  }
+        const checkExistence = foundLabels.filter((i)=>i.name === newLabel.name && i.color === newLabel.color);
+        console.log(checkExistence)
+        if (!checkExistence.length) {
+            setFoundLabels([...foundLabels.concat(newLabel)]);
+        }
     }
     const deleteLabel = () => {
-        const label = {name: 'bob', color:'pink'  };
-        item.labels.splice(item.labels.indexOf(i=>i.name == label.name),1)
-        console.log(item)
+        item.labels = item.labels.filter(i=>i.name !== 'Bob');
         updateItem(item)
         onLabelsModalClose()
     }

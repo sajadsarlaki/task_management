@@ -72,7 +72,7 @@ const Task = ({item, index, moveItem, removeItem, status, updateItem}) => {
                 <p className={'item__footer'}>
                     <span className="item__status">{item.icon}</span>
                     <button className={'item__dl-btn'} onClick={()=>removeItem(item.id)}>
-                        remove
+                        ❌
                     </button>
                 </p>
 
