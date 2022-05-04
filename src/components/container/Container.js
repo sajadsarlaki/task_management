@@ -25,7 +25,6 @@ const Container = () => {
     }, [theColumns]);
 
 
-    const [newItemText, setNewItemTask] = useState("")
     // loading tasks form local storage into state
     useEffect(() => {
 
@@ -135,26 +134,11 @@ const Container = () => {
             {theColumns.map(col=>{
                 return(
                     <div key={col.status } className={'col-wrapper'}>
-                        <DropWrapper onDrop={onDrop} status={col.status} deleteColumn={deleteColumn} >
-                            <Column>
+                        <DropWrapper onDrop={onDrop} column={col} addNewItem={addNewItem} deleteColumn={deleteColumn} >
+                            <Column addNewItem={addNewItem}>
                                 {items.filter(i => i.status === col.status)
                                     .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={col.status} removeItem={removeItem} updateItem={updateItem}/>
                                     )}
-                                <div className={'content__add-area'}>
-                                    <textarea
-                                        name="Text1"
-                                        cols="25"
-                                        rows="5"
-                                        value={newItemText}
-                                        onChange={(e) => setNewItemTask(e.target.value)}
-                                        onKeyDown={(e) => e.key ==='Enter' ? addNewItem(newItemText, col):undefined}
-                                        placeholder={"+ write and hit enter"}
-                                        className={"content__input"}
-
-                                    />
-
-                                </div>
-
                             </Column>
                         </DropWrapper>
 
