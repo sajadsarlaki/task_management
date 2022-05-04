@@ -49,7 +49,12 @@ const Container = () => {
         )
     }
     const addNewItem = () => {
-        const lastId = items[items.length - 1].id
+        let lastId = 1;
+        items.forEach(i=>{
+            if (i.id > lastId)
+                lastId = i.id;
+        })
+
         const newTask = {
             id: lastId + 1,
                 icon: "⭕️",
@@ -58,6 +63,8 @@ const Container = () => {
             content: "Finish reading Intro to UI/UX"
         }
         setItems([...items,newTask])
+        console.log('last id ',lastId)
+        console.log(items)
     }
     return(
         <div className="content">
