@@ -25,6 +25,7 @@ const Container = () => {
     }, [theColumns]);
 
 
+    const [newItemText, setNewItemTask] = useState("")
     // loading tasks form local storage into state
     useEffect(() => {
 
@@ -92,7 +93,8 @@ const Container = () => {
             [...newItems]
         )
     }
-    const addNewItem = () => {
+    const addNewItem = (text, col) => {
+        console.log(status)
         let lastId = 1;
         items.forEach(i=>{
             if (i.id > lastId)
@@ -101,10 +103,10 @@ const Container = () => {
 
         const newTask = {
             id: lastId + 1,
-                icon: "⭕️",
-            status: "open",
+            icon: col.icon,
+            status: col.status,
             title: "Daily reading",
-            content: "Finish reading Intro to UI/UX"
+            content: text
         }
         setItems([...items,newTask])
     }
@@ -126,9 +128,6 @@ const Container = () => {
     }
     return(
         <div className="content">
-            <button className={'content__add-btn'} onClick={addNewItem}>
-                Click to add
-            </button>
 
             <button className={'content__add-btn'} onClick={addItemsColumn}>
                 Click to add column
@@ -142,6 +141,21 @@ const Container = () => {
                                 {items.filter(i => i.status === col.status)
                                     .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={col.status} removeItem={removeItem} updateItem={updateItem}/>
                                     )}
+                                <div className={'content__add-area'}>
+                                    <textarea
+                                        name="Text1"
+                                        cols="25"
+                                        rows="5"
+                                        value={newItemText}
+                                        onChange={(e) => setNewItemTask(e.target.value)}
+                                        onKeyDown={(e) => e.key ==='Enter' ? addNewItem(newItemText, col):undefined}
+                                        placeholder={"+ write and hit enter"}
+                                        className={"content__input"}
+
+                                    />
+
+                                </div>
+
                             </Column>
                         </DropWrapper>
 

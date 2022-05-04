@@ -56,9 +56,30 @@ p {
   flex-direction: row;
   justify-content: center;
   //border: 1px solid #777;
+  &__add-area{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   &__add-btn{
-    width: 4rem;
-    height: 4rem;
+    height: 2rem;
+    width: 2rem;
+  }
+  &__input{
+    flex: 1;
+    border: 2px solid $disabled-color;
+    caret-color: red;
+    font-size: 0.8rem;
+    &:focus{
+      outline: none !important;
+      border: 2px solid $complete-color;
+      box-shadow: 0 0 10px #719ECE;
+    }
+    &::placeholder{
+      font-family: cursive;
+      font-weight: bold;
+      font-size: 1rem;
+    }
   }
 
 }
