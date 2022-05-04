@@ -67,7 +67,7 @@ const Container = () => {
 
     const addItemsColumn = () => {
         const newCol ={
-            status: "don",
+            status: `done + ${Math.floor(Math.random()*5)}`,
             icon: "✅",
             color: "#3981DE"
         }

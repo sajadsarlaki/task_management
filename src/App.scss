@@ -28,7 +28,7 @@ p {
   text-align: left;
 }
 
-#root{
+.root{
   background: $linear-bg;
     //display: grid;
     //grid-gap: 10px;
@@ -38,8 +38,8 @@ p {
     //"sidebar content content"
     //"sidebar  ......  .......";
     //color: #444;
-  display: flex;
-  flex-direction: column;
+
+  overflow-x: scroll;
 }
 .header{
   grid-area: header;
@@ -85,26 +85,53 @@ select {
 
 
 .item {
+  display: flex;
+  flex-direction: column;
+
+;
+
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
   z-index: 1;
   background-color: white;
+  max-width: 20rem;
+
   &:hover{
     cursor: pointer;
   }
+  &__content{
+
+  }
   &__title{
+    grid-area: title;
     font-weight: 600;
     font-size: 0.8rem;
   }
   &__status{
+    grid-area: status;
     text-align: right;
   }
-  &__content{
+  &__label-section{
+    grid-area: labels;
+    padding-top: .5rem;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: repeat(2,1fr) ;
   }
-  &__color-bar{
-
+  &__label-span{
+    padding: 0.1rem;
+    border-radius: .5rem;
+    text-align: center;
+  }
+  &__dl-btn{
+    grid-area: dlbtn;
+  }
+  &__footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -128,7 +155,7 @@ select {
   padding: 20px;
   background-color: $background-color;
   border-radius: 5px;
-  min-width: 250px;
+  //min-width: 250px;
   &__col-header{
     font-size: 20px;
     font-weight: 600;

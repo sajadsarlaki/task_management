@@ -2,25 +2,13 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 // This holds a list of some fiction people
 // Some  have the same name but different age and id
-const labels = [
-    { id: 1, name: 'Andy', color:'#fd2'  },
-    { id: 2, name: 'Bob',  color:'#900'},
-    { id: 3, name: 'Tom Hulk', color:'#090'},
-    { id: 4, name: 'Tom Hank', color:'#009' },
-    { id: 5, name: 'Audra',  },
-    { id: 6, name: 'Anna',  },
-    { id: 7, name: 'Tom' },
-    { id: 8, name: 'Tom Riddle' },
-    { id: 9, name: 'Bolo' },
-];
+import {labels} from "../../data/dataset";
 
 function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     // the value of the search field
     const [name, setName] = useState('');
-
     // the search result
     const [foundLabels, setFoundLabels] = useState(labels);
-
     const filter = (e) => {
         const keyword = e.target.value;
 
@@ -40,11 +28,28 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
 
     const addLabelToItems = (labelItem) => {
         const newItem = item;
+        if(item.labels.includes(labelItem)){
+            onLabelsModalClose()
+            return
+        }
+
         newItem.labels.push(labelItem);
-        updateItem(newItem)
+        updateItem(newItem);
         onLabelsModalClose()
     }
 
+    const addNewLabel = () => {
+        let newLabel = { id:10, name: 'kos', color:'pink'  }
+        setFoundLabels([...foundLabels.concat(newLabel)])
+
+    }
+    const deleteLabel = () => {
+        const label = {name: 'bob', color:'pink'  };
+        item.labels.splice(item.labels.indexOf(i=>i.name == label.name),1)
+        console.log(item)
+        updateItem(item)
+        onLabelsModalClose()
+    }
     return (
         <Modal
             isOpen = {showLabels}
@@ -78,6 +83,12 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
                 )}
             </div>
         </div>
+            <button onClick={() => addNewLabel()}>
+                add new label
+            </button>
+            <button onClick={() => deleteLabel()}>
+                delete label
+            </button>
         </Modal>
     );
 }
