@@ -4,19 +4,23 @@ import Modal from 'react-modal'
 Modal.setAppElement('#root');
 
 const Popup = ({incomingFunction,incomingArg, show, closePopUp}) => {
-    const [popup, setPopup] = useState(show);
-    console.log('hey')
     return (
         <Modal
             isOpen = {show}
             onRequestClosed = {closePopUp}
-            className={"modal"}
+            className={"delete-modal"}
             overlayClassName={'overlay'}
         >
-            <div>
-                hey
-                <button onClick={closePopUp}>click</button>
-                <button onClick={() => incomingFunction(incomingArg)}>shore</button>
+            <div className={'delete-modal__header'}>
+                <p onClick={closePopUp} className={'delete-modal__header-txt'}><span className={'delete-modal__alert'}>⚠️</span>️Alert</p>
+                <span className={'delete-modal--action delete-modal__cancel'} onClick={closePopUp}>❌</span>
+            </div>
+            <p className={'delete-modal__msg'}>
+                Do you shore you want to remove this item?
+            </p>
+            <div className={'delete-modal__footer'}>
+                <span className={'delete-modal--action delete-modal__no'} onClick={closePopUp}>No <span className={'delete-modal__icon '}> 🙅‍♂️</span></span>
+                <span className={'delete-modal--action delete-modal__yes'} onClick={() => incomingFunction(incomingArg)}>Yes <span className={'delete-modal__icon '}>fe</span></span>
             </div>
         </Modal>
     )

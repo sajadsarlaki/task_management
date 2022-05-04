@@ -170,6 +170,59 @@ select {
   }
 }
 
+.delete-modal{
+  background-color: #F4F5F7;
+  border-radius: 2px;
+  margin: 10rem 10rem 25rem 10rem;
+  width: 40rem;
+  outline:none;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__msg{
+    align-self: center;
+    font-size: 1.5rem;
+  }
+  &__footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &--action{
+    cursor: pointer;
+    padding: .4rem;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+  &__icon{
+    font-size: 1.5rem;
+  }
+  &__header-txt{
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  &__alert{
+    margin-right: .6rem;
+  }
+  &__yes{
+    background-color: rgba(250,0,0,.3);
+  }
+  &__no{
+    background-color: rgba(0,250,0,.3);
+  }
+  &__cancel{
+    border: none;
+  }
+}
 
 .color-bar {
   width: 40px;
