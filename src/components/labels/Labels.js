@@ -61,7 +61,12 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
             className={"label-modal"}
             overlayClassName={'overlay'}
         >
+
         <div className="label-modal__content">
+            <div className="label-modal__header">
+                <p>Label Section</p>
+                <div className={'label-modal--close'} onClick={onLabelsModalClose}><span>❌</span></div>
+            </div>
             <input
                 type="search"
                 value={name}

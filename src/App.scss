@@ -195,6 +195,8 @@ select {
   &__header{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
   &__content{
     display: flex ;
@@ -224,6 +226,14 @@ select {
     border-radius: .2rem;
     margin: 0.2rem;
     cursor: pointer;
+  }
+  &__closed-btn{
+    background: transparent;
+    cursor: pointer;
+  &:hover{
+    transform: scale(1.8);
+    transition: transform 150ms;
+  }
   }
 }
 
@@ -260,10 +270,20 @@ select {
   justify-content: space-evenly;
   border-radius: .05rem;
   margin: 3rem ;
-  min-height: 5rem;
   width: 15rem;
+  min-height: 20rem;
+  max-height: 35rem;
   outline: none;
   padding: 1rem;
+  &__header{
+    display: flex;
+    flex-direction: row ;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid  red ;
+    margin-bottom: .5rem;
+    padding-bottom: .5rem;
+  }
   &__content{
     display: flex;
     flex-direction: column;
@@ -280,6 +300,13 @@ select {
       cursor: pointer;
       border: 1px solid black;
       border-radius: .5rem;
+    }
+  }
+  &--close{
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.5);
+      transition: transform 150ms ;
     }
   }
 }

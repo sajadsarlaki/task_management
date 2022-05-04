@@ -18,8 +18,8 @@ const Window = ({show, onClose, item, updateItem})=>{
             overlayClassName={'overlay'}
         >
             <div className="modal__header" id={'btn'}>
-                <h1 style={{flex:"1 90%"}}> {item.title}</h1>
-                <button className={"closed-btn"} onClick={onClose}>X</button>
+                <h1 > {item.title}</h1>
+                <div className={"modal__closed-btn"} onClick={onClose}>❌</div>
             </div>
             <div className={"modal__content"}>
                 <h2><span>📝</span>️ Description</h2>

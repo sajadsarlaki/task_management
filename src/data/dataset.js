@@ -49,7 +49,12 @@ const labels = [
     { name: 'Bob',  color:'red'},
     { name: 'Tom Hulk', color:'#090'},
     { name: 'Tom Hank', color:'#009' },
-
 ];
+
+// save to localStorage
+// localStorage.setItem("items", JSON.stringify(data) );
+// localStorage.setItem("statuses", JSON.stringify(statuses));
+// localStorage.setItem("items", JSON.stringify(labels) );
+
 
 export { data, statuses, labels };

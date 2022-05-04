@@ -1,12 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Task from "../task/Task";
 import DropWrapper from "../dropWrapper/DropWrapper";
 import Column from "../column/Column";
 import {data, statuses} from '../../data/dataset'
-const Container = () => {
+const tempTasks = JSON.parse(localStorage.getItem('items') || JSON.stringify(data));
+const tempStatuses = JSON.parse(localStorage.getItem('columns') || JSON.stringify(statuses));
 
-    const [items, setItems] = useState(data);
-    const [itemsColumn, setItemsColumn] = useState(statuses);
+const Container = () => {
+    // task
+    const [items, setItems] = useState(tempTasks);
+    // statuses
+    const [itemsColumn, setItemsColumn] = useState(tempStatuses);
+
+    // saving data whenever tasks changes
+    useEffect(() => {
+        console.log('saving => ', JSON.stringify(items))
+        localStorage.setItem('items', JSON.stringify(items));
+
+
+    }, [items]);
+    // saving data whenever tasks changes
+    useEffect(() => {
+        localStorage.setItem('columns', JSON.stringify(itemsColumn));
+    }, [itemsColumn]);
+
+
+    // loading tasks form local storage into state
+    useEffect(() => {
+
+        const items = JSON.parse(localStorage.getItem('items'));
+        console.log('reading => ', items)
+
+        if (items.length) {
+            console.log(items)
+            setItems(items);
+        }
+    }, []); useEffect(() => {
+        console.log('saving => ', JSON.stringify(items))
+        localStorage.setItem('items', JSON.stringify(items));
+
+    }, [items]);
+
+    // loading statuses form local storage into state
+    useEffect(() => {
+        const itemsColumn = JSON.parse(localStorage.getItem('columns'));
+        console.log('reading => ', itemsColumn)
+        if (statuses.length) {
+            console.log(itemsColumn)
+            setItemsColumn(itemsColumn);
+        }
+    }, []);
+
 
     const updateItem = (updatedItem) => {
         let index;
