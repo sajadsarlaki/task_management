@@ -4,7 +4,10 @@ import DropWrapper from "../dropWrapper/DropWrapper";
 import Column from "../column/Column";
 import {data, statuses} from '../../data/dataset'
 const Container = () => {
+
     const [items, setItems] = useState(data);
+    const [itemsColumn, setItemsColumn] = useState(statuses);
+
     const updateItem = (updatedItem) => {
         let index;
         for (let i = 0; i<items.length;i++){
@@ -20,11 +23,8 @@ const Container = () => {
         })
 
     }
-
-
-
     const onDrop = (item, monitor, status) => {
-        const mapping = statuses.find(si => si.status === status);
+        const mapping = itemsColumn.find(si => si.status === status);
         setItems(prevState => {
             const newItems = prevState
                 .filter(i => i.id !== item.id)
@@ -63,22 +63,35 @@ const Container = () => {
             content: "Finish reading Intro to UI/UX"
         }
         setItems([...items,newTask])
-        console.log('last id ',lastId)
-        console.log(items)
     }
+
+    const addItemsColumn = () => {
+        const newCol ={
+            status: "don",
+            icon: "✅",
+            color: "#3981DE"
+        }
+        setItemsColumn(prevState => [...prevState.concat(newCol)])
+        console.log(itemsColumn)
+    }
+
     return(
         <div className="content">
             <button className={'content__add-btn'} onClick={addNewItem}>
                 Click to add
             </button>
-            {statuses.map(s=>{
+
+            <button className={'content__add-btn'} onClick={addItemsColumn}>
+                Click to add column
+            </button>
+            {itemsColumn.map(col=>{
                 return(
-                    <div key={s.status } className={'col-wrapper'}>
-                        <h2 className={'col-wrapper__header'}>{s.status.toUpperCase()}</h2>
-                        <DropWrapper onDrop={onDrop} status={s.status}>
+                    <div key={col.status } className={'col-wrapper'}>
+                        <h2 className={'col-wrapper__header'}>{col.status.toUpperCase()}</h2>
+                        <DropWrapper onDrop={onDrop} status={col.status}>
                             <Column>
-                                {items.filter(i => i.status === s.status)
-                                    .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={s.status} removeItem={removeItem} updateItem={updateItem}/>
+                                {items.filter(i => i.status === col.status)
+                                    .map((i,idx)=> <Task key={i.id} item={i} index={idx} moveItem={moveItem} status={col.status} removeItem={removeItem} updateItem={updateItem}/>
                                     )}
                             </Column>
                         </DropWrapper>

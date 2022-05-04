@@ -30,14 +30,16 @@ p {
 
 #root{
   background: $linear-bg;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 4fr 1fr;
-    grid-template-areas:
-    "header header header"
-    "sidebar content content"
-    "sidebar  ......  .......";
-    color: #444;
+    //display: grid;
+    //grid-gap: 10px;
+    //grid-template-columns: 1fr 4fr 1fr;
+    //grid-template-areas:
+    //"header header header"
+    //"sidebar content content"
+    //"sidebar  ......  .......";
+    //color: #444;
+  display: flex;
+  flex-direction: column;
 }
 .header{
   grid-area: header;
