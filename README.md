@@ -1,7 +1,7 @@
 # Simple task management app
 
 
-## runing
+## running
 run `npm i` in your directory terminal.
 then run  `npm start`
 
