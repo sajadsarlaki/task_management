@@ -15,6 +15,7 @@ function Label({ item, onLabelsModalClose, showLabels, updateItem }) {
   // modal for add or edit a label
   const [editAddLabelModal, setEditAddLabelModal] = useState(false);
 
+  const [searchLabels, setSearchLabels] = useState(foundLabels)
   // loading tasks form local storage into state
   useEffect(() => {
     let theLabels = JSON.parse(localStorage.getItem('labels'));
@@ -41,17 +42,16 @@ function Label({ item, onLabelsModalClose, showLabels, updateItem }) {
   const [currentLabel, setCurrentLabel] = useState({});
 
   const filter = (e) => {
-    const keyword = e.target.value;
+    const keyword = e.target.value.trim();
 
     if (keyword !== '') {
-      const results = labels.filter((user) => {
-        return user.name.toLowerCase().startsWith(keyword.toLowerCase());
+      const results = foundLabels.filter((label) => {
+        return label.name.toLowerCase().startsWith(keyword.toLowerCase());
         // Use the toLowerCase() method to make it case-insensitive
       });
-      setFoundLabels(results);
+      setSearchLabels(results);
     } else {
-      setFoundLabels(labels);
-      // If the text field is empty, show all users
+      setSearchLabels(foundLabels);
     }
 
     setName(keyword);
@@ -173,8 +173,8 @@ function Label({ item, onLabelsModalClose, showLabels, updateItem }) {
         />
 
         <div className="label-modal__list">
-          {foundLabels && foundLabels.length > 0 ? (
-            foundLabels.map((labelItem) => (
+          {searchLabels && searchLabels.length > 0 ? (
+              searchLabels.map((labelItem) => (
               <div
                 style={{
                   display: 'flex',
