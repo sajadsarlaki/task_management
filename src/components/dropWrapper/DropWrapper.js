@@ -49,7 +49,7 @@ const DropWrapper = ({ onDrop, children, column, addNewItem, deleteColumn }) => 
                 <textarea
                     name={`text}`}
                     cols="25"
-                    rows="5"
+                    rows="4"
                     value={newItemText}
                     onChange={(e) => setNewItemTask(e.target.value.replace('\n',""))}
                     onKeyDown={(e) => addIt(e)}

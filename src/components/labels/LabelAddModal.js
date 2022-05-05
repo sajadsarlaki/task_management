@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 
 Modal.setAppElement('#root');
 
-const colorList = ["red","yellow","blue","green","purple"]
+const colorList = ["#aa6288","#DE3163","#FF7F50","#6495ED","#553973","#FDFD95","#F692BC","#F692BC","red","yellow","blue","green","purple"]
 
 const LabelAddModal = ({
                     addNewLabel,
@@ -69,6 +69,7 @@ const LabelAddModal = ({
                 className={'add-label-modal__input'}
                 placeholder={'Enter the name'}
                 onChange={(e)=>setName(e.target.value)}
+
             />
 
             <div className={'add-label-modal__colors'}>
@@ -85,7 +86,7 @@ const LabelAddModal = ({
 
                     onClick={mode? handleAdd:handleEdit}
                 >
-                    Ok</span>
+                    Ok👌</span>
 
                 {!mode?
                     <span className={'add-label-modal--dl-btn'}

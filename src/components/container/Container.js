@@ -102,7 +102,7 @@ const Container = () => {
             id: lastId + 1,
             icon: col.icon,
             status: col.status,
-            title: "Daily reading",
+            title: text.split(' ')[0],
             content: text,
             labels:[]
         }
