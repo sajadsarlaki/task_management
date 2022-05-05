@@ -3,12 +3,22 @@ import Modal from 'react-modal';
 // This holds a list of some fiction people
 // Some  have the same name but different age and id
 import {labels} from "../../data/dataset";
+import LabelAddModal from "./LabelAddModal";
 
 function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     // the value of the search field
     const [name, setName] = useState('');
     // the search result
     const [foundLabels, setFoundLabels] = useState(labels);
+
+    const [editAddLabelModal, setEditAddLabelModal] = useState(false);
+    const onLabelModalClosed = () =>{setEditAddLabelModal(false)}
+    const onLabelModalOpen = () =>{setEditAddLabelModal(true)}
+    // mode 0 for edit , mode 1 for add
+    const [mode, setMode] = useState(0);
+
+    const [currentLabel, setCurrentLabel] = useState({});
+
     const filter = (e) => {
         const keyword = e.target.value;
 
@@ -26,33 +36,66 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
         setName(keyword);
     };
 
-    const addLabelToItems = (labelItem) => {
+    const handleLabelClicked = (labelItem) => {
         const newItem = item;
         if (!newItem.labels)
             newItem.labels = [];
 
         if(item.labels.includes(labelItem)){
-            onLabelsModalClose()
+            item.labels = item.labels.filter(i=>i.name !== labelItem.name && i.color !== labelItem.color);
+            updateItem(newItem);
             return
         }
 
         newItem.labels.push(labelItem);
         updateItem(newItem);
-        onLabelsModalClose()
+        // onLabelsModalClose()
     }
 
-    const addNewLabel = () => {
-        let newLabel = { name: 'fe', color:'red'  }
+    const addNewLabel = (newLabel) => {
         const checkExistence = foundLabels.filter((i)=>i.name === newLabel.name && i.color === newLabel.color);
         console.log(checkExistence)
         if (!checkExistence.length) {
             setFoundLabels([...foundLabels.concat(newLabel)]);
         }
     }
-    const deleteLabel = () => {
-        item.labels = item.labels.filter(i=>i.name !== 'Bob');
+
+    const deleteLabel = (labelItem) => {
+        item.labels = item.labels.filter(i=>i.name !== labelItem.name && i.color !== labelItem.color);
         updateItem(item)
         onLabelsModalClose()
+    }
+
+    const editLabel = (prev, current) => {
+        console.log("---edit")
+        console.log(prev)
+        console.log('----')
+        console.log(current)
+
+        setFoundLabels(prevState => {
+            console.log(prevState)
+            for (let i = 0; i<foundLabels.length;i++){
+                if (prevState[i].name === prev.name && prevState[i].color === prev.color)
+                    prevState[i] = current;
+            }
+            return([...prevState])
+        })
+        onLabelsModalClose()
+    }
+
+    const handleEditLabel = (labelItem) => {
+        // set current item
+        setCurrentLabel(labelItem)
+        // setting mode to edit
+        setMode(0);
+        // opening popup
+        onLabelModalOpen()
+    }
+    const handleAddLabel = () => {
+        // setting mode to add
+        setMode(1);
+        // opening popup
+        onLabelModalOpen()
     }
     return (
         <Modal
@@ -78,13 +121,18 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
             <div className="label-modal__list">
                 {foundLabels && foundLabels.length > 0 ? (
                     foundLabels.map((labelItem) => (
+                        <div style={{display:"flex", flexDirection:'row', alignItems:'center'}}>
                         <div
                             key={labelItem.id}
                             className="label-modal__item"
                             style={{backgroundColor:labelItem.color}}
-                            onClick={() => addLabelToItems(labelItem)}
+                            onClick={() => handleLabelClicked(labelItem)}
                         >
                           {labelItem.name}
+                            <span>{item.labels.includes(labelItem)?'  ✔':''}</span>
+                        </div>
+                            <span className={'label-modal--edit'} onClick={()=>handleEditLabel(labelItem)}>🖊️</span>
+
                         </div>
                     ))
                 ) : (
@@ -92,13 +140,27 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
                 )}
             </div>
         </div>
-            <button onClick={() => addNewLabel()}>
+            <button onClick={handleAddLabel}>
                 add new label
             </button>
-            <button onClick={() => deleteLabel()}>
-                delete label
-            </button>
+
+
+            <LabelAddModal
+                addNewLabel={addNewLabel}
+                deleteLabel={deleteLabel}
+                editLabel={editLabel}
+                showingAddLabelModal={editAddLabelModal}
+                onLabelModalClosed={onLabelModalClosed}
+                onLabelModalOpen={onLabelModalOpen}
+                prevState={currentLabel}
+                mode={mode}
+            />
+
+
+
         </Modal>
+
+
     );
 }
 
