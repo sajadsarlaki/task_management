@@ -12,6 +12,11 @@ const Container = () => {
     // statuses
     const [theColumns, setTheColumns] = useState(tempStatuses);
 
+    const [newColumn, setNewColumn] = useState({
+        status:"",
+        icon: "✅",
+        color: "red"
+    })
     // saving data whenever tasks changes
     useEffect(() => {
         console.log('saving => ', JSON.stringify(items))
@@ -112,17 +117,17 @@ const Container = () => {
         setItems([...items,newTask])
     }
 
-    const addItemsColumn = () => {
-        const newCol ={
-            status: `done4 + ${Math.floor(Math.random()*5)}`,
-            icon: "✅",
-            color: "#3981DE"
+    const addItemsColumn = (e) => {
+        if (e.key ==='Enter'){
+            if(newColumn.status.trim())
+                setNewColumn({...newColumn, status:"New Item" })
+            if (!theColumns.filter(i => i.status === newColumn.status).length)
+                setTheColumns(prevState => [...prevState.concat(newColumn)])
+            else {
+                alert('sorry')
+            }
         }
-        if (!theColumns.filter(i => i.status === newCol.status).length)
-            setTheColumns(prevState => [...prevState.concat(newCol)])
-        else {
-            alert('sorry')
-        }
+
     }
     const deleteColumn = (status) => {
         setTheColumns([...theColumns.filter(i=>i.status !== status)]);
@@ -130,9 +135,7 @@ const Container = () => {
     return(
         <div className="content">
 
-            <button className={'content__add-btn'} onClick={addItemsColumn}>
-                Click to add column
-            </button>
+
             {theColumns.map(col=>{
                 return(
                     <div key={col.status } className={'col-wrapper'}>
@@ -147,6 +150,18 @@ const Container = () => {
                     </div>
                 )
             })}
+            <div className="col-wrapper">
+                 <input
+                     name={`text}`}
+                     type={'text'}
+                     value={newColumn.status}
+                     onChange={(e) => setNewColumn({...newColumn,status: e.target.value})}
+                     onKeyDown={(e) => addItemsColumn(e)}
+                     placeholder={"+ add column"}
+                     className={"col-wrapper__input"}
+
+                 />
+            </div>
 
         </div>
     )

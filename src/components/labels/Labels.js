@@ -17,8 +17,9 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     // loading tasks form local storage into state
     useEffect(() => {
 
-        const theLabels = JSON.parse(localStorage.getItem('labels'));
-        console.log('reading labels => ', labels)
+
+        let theLabels = JSON.parse(localStorage.getItem('labels'));
+        if (!theLabels) theLabels = labels;
 
         if (theLabels.length) {
             console.log(theLabels)
@@ -152,7 +153,7 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
 
         <div className="label-modal__content">
             <div className="label-modal__header">
-                <p>Label Section</p>
+                <p className={'label-modal__header-txt'}>Label Section</p>
                 <div className={'label-modal--close'} onClick={onLabelsModalClose}><span>❌</span></div>
             </div>
             <input
@@ -185,10 +186,9 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
                 )}
             </div>
         </div>
-            <button onClick={handleAddLabel}>
+            <div className={'label-modal__add-btn'} onClick={handleAddLabel}>
                 add new label
-            </button>
-
+            </div>
 
             <LabelAddModal
                 addNewLabel={addNewLabel}

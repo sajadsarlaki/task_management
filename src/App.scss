@@ -31,8 +31,8 @@ p {
 #root{
   background: $linear-bg;
   display: flex;
+  flex: 1;
   flex-direction: column;
-
   overflow-x: scroll;
 }
 .sidebar{
@@ -113,6 +113,23 @@ select {
     margin-bottom: 20px;
     margin-top: 0;
   }
+  &__input{
+    margin-top: .5rem;
+    border: 2px solid $disabled-color;
+    caret-color: red;
+    font-size: 0.8rem;
+    padding: 1rem;
+    &:focus{
+      outline: none !important;
+      border: 2px solid $complete-color;
+      box-shadow: 0 0 10px #719ECE;
+    }
+    &::placeholder{
+      font-family: cursive;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
 }
 
 .item {
@@ -145,11 +162,12 @@ select {
   }
   &__label-span{
     display: inline-block;
-    padding: 0.1rem 0.3rem;
+    padding: 0.2rem 0.5rem;
     margin: 0.1rem 0.2rem;
     border-radius: .5rem;
     text-align: center;
     color: white;
+    min-width: 1rem;
   }
   &__dl-btn{
     background-color: white;
@@ -368,7 +386,7 @@ select {
   border-radius: .05rem;
   margin: 3rem ;
   width: 15rem;
-  min-height: 20rem;
+  //min-height: rem;
   max-height: 35rem;
   outline: none;
   padding: 1rem;
@@ -377,7 +395,7 @@ select {
     flex-direction: row ;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid  red ;
+    border-bottom: 2px solid  $background-color ;
     margin-bottom: .5rem;
     padding-bottom: .5rem;
   }
@@ -387,6 +405,32 @@ select {
   }
   &__input{
     height: 3rem;
+    outline: none;
+    border: 3px solid $background-color;
+    border-radius: .3rem;
+    &::placeholder{
+      font-family: cursive;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    &:focus{
+      outline: none !important;
+      border: 2px solid $complete-color;
+      box-shadow: 0 0 10px #719ECE;
+    }
+
+  }
+  &__add-btn{
+    padding: .5rem;
+    margin-top: 1rem;
+    outline: none;
+    border: 3px solid $background-color;
+    border-radius: .3rem;
+    text-align: center;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
   }
   &__item{
     display: flex;
@@ -400,7 +444,7 @@ select {
     border-radius: .2rem;
     &:hover{
       cursor: pointer;
-      border: 1px solid black;
+      border-left: 1rem solid  opacify(transparent,0.3);
     }
   }
   &__item-span{
@@ -421,6 +465,10 @@ select {
     &:hover{
       background-color: #ccc;
     }
+  }
+  &__header-txt{
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 }
 

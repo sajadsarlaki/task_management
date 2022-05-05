@@ -8,9 +8,9 @@ import Header from "./components/header/Header";
 const App = () => {
     return(
     <DndProvider backend={HTML5Backend}>
-        <Header />
+        {/*<Header />*/}
         <div className={'middle'}>
-            <div className={'sidebar'}>sidebar</div>
+            {/*<div className={'sidebar'}>sidebar</div>*/}
             <Container />
         </div>
 

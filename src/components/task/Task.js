@@ -68,7 +68,7 @@ const Task = ({item, index, moveItem, removeItem, status, updateItem}) => {
                 <div onClick={onOpen}>
                     <div className={'item__label-section'}>
                         {item.labels ?
-                            item.labels.map(i=><span className={'item__label-span'} style={{backgroundColor:i.color}}>{i.name}</span>):""}
+                            item.labels.map(i=><span className={'item__label-span'} style={{backgroundColor:i.color}} />):""}
 
                     </div>
                     <div className="item__content" style={{backgroundColor: status.color}}>
