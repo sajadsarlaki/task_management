@@ -1,13 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from 'react-modal';
-import {labels} from "../../data/dataset";
+import {data, labels} from "../../data/dataset";
 import LabelAddModal from "./LabelAddModal";
+const tempLabels = JSON.parse(localStorage.getItem('labels') || JSON.stringify(labels));
 
 function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     // the value of the search field
     const [name, setName] = useState('');
     // the search result
-    const [foundLabels, setFoundLabels] = useState(labels);
+    const [foundLabels, setFoundLabels] = useState(tempLabels);
+    // useEffect(() => {
+    //     console.log('saving labels => ', JSON.stringify(foundLabels))
+    //     localStorage.setItem('labels', JSON.stringify(foundLabels));
+    // }, [foundLabels]);
+
+    // loading tasks form local storage into state
+    useEffect(() => {
+
+        const theLabels = JSON.parse(localStorage.getItem('labels'));
+        console.log('reading labels => ', labels)
+
+        if (theLabels.length) {
+            console.log(theLabels)
+            setFoundLabels(theLabels);
+        }
+    }, []);
+
 
     const [editAddLabelModal, setEditAddLabelModal] = useState(false);
     const onLabelModalClosed = () =>{setEditAddLabelModal(false)}
@@ -51,17 +69,28 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
         // onLabelsModalClose()
     }
 
-    const addNewLabel = (newLabel) => {
+    const addNewLabel = async (newLabel) => {
         const checkExistence = foundLabels.filter((i)=>i.name === newLabel.name && i.color === newLabel.color);
         console.log(checkExistence)
         if (!checkExistence.length) {
-            setFoundLabels([...foundLabels.concat(newLabel)]);
+            const newLabels = foundLabels;
+            newLabels.push(newLabel)
+            await setFoundLabels([...newLabels]);
+            console.log(foundLabels  ,"here")
+
+            localStorage.setItem('labels', JSON.stringify(foundLabels));
+
         }
+
     }
 
     const deleteLabel = (labelItem) => {
         setFoundLabels(prevState => {
-         return   [...prevState.filter(i => i.name !== labelItem.name || i.color !== labelItem.color)]
+            const newLabels = prevState.filter(i => i.name !== labelItem.name || i.color !== labelItem.color);
+            console.log(newLabels, '----->')
+            localStorage.setItem('labels', JSON.stringify(newLabels));
+
+            return   [...newLabels]
         })
         //
         for (let i = 0; i < item.labels.length; i++) {
@@ -71,6 +100,7 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
             onLabelsModalClose()
 
         }
+
     }
 
     const editLabel = (prev, current) => {
@@ -87,10 +117,13 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
             }
             return([...prevState])
         })
+
+        console.log('$$$$',foundLabels)
         for (let i = 0; i < item.labels.length; i++) {
             if ( item.labels[i].name === prev.name &&  item.labels[i].color === prev.color )
                 item.labels[i] = current;
         }
+        localStorage.setItem('labels', JSON.stringify(foundLabels));
 
 
     }

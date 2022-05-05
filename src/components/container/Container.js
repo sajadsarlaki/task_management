@@ -35,7 +35,8 @@ const Container = () => {
             console.log(items)
             setItems(items);
         }
-    }, []); useEffect(() => {
+    }, []);
+    useEffect(() => {
         console.log('saving => ', JSON.stringify(items))
         localStorage.setItem('items', JSON.stringify(items));
 
