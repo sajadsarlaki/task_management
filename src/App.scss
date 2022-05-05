@@ -1,13 +1,18 @@
-
 $primary-color: rgb(62, 100, 255);
 $complete-color: #27aa80;
 $text-color: #172b4d;
 $disabled-color: #fad6d6;
 $background-color: #f5eaea;
-$linear-bg: linear-gradient(90deg, rgba(20,20,20,50) 0%, rgba(40,40,40,70) 46%, rgba(60,60,60,60) 100%);
+$linear-bg: linear-gradient(
+  90deg,
+  rgba(20, 20, 20, 50) 0%,
+  rgba(40, 40, 40, 70) 46%,
+  rgba(60, 60, 60, 60) 100%
+);
 
+//global
 html {
-  background: $linear-bg
+  background: $linear-bg;
 }
 
 body {
@@ -26,108 +31,86 @@ p {
   margin: 0.5rem 0;
   overflow-wrap: break-word;
   text-align: left;
+  font-size: 1rem;
 }
 
-.header{
+// main page
+#root {
+  background: $linear-bg;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.header {
   display: flex;
   flex: 1;
   background-color: $background-color;
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
-  &__inner{
+  &__inner {
     font-family: cursive;
     font-size: 2rem;
     font-weight: bold;
   }
 }
-
-#root{
-  background: $linear-bg;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-.sidebar{
-  min-width: 15rem;
-  border: 1px solid #777;
-  height: 70vh;
-}
-.middle{
+// main content wrapper
+.middle {
   display: flex;
   flex-direction: row;
   //justify-content: center;
   height: 70vh;
   overflow-x: auto;
-  padding:  5rem ;
+  padding: 5rem;
   &::-webkit-scrollbar {
     width: 1rem;
   }
   &::-webkit-scrollbar-track {
     background-color: transparent;
-
   }
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(256,256,256,0.1);
+    background-color: rgba(256, 256, 256, 0.1);
   }
   &::-webkit-scrollbar-thumb {
     //background-color: #d6dee1;
     border-radius: 1rem;
   }
 }
-.header{
-  grid-area: header;
-  grid-row: 1;
-  //border: 1px solid #777;
 
-}
-.content{
+//  hold the actual content
+.content {
   display: flex;
   flex-direction: row;
-  &__add-area{
+  &__add-area {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
-  &__add-btn{
+  &__add-btn {
     height: 2rem;
     width: 2rem;
   }
-  &__input{
+  &__input {
     flex: 1;
     border: 2px solid $disabled-color;
     caret-color: red;
     font-size: 1rem;
 
-    &:focus{
+    &:focus {
       outline: none !important;
       border: 2px solid $complete-color;
-      box-shadow: 0 0 10px #719ECE;
+      box-shadow: 0 0 10px #719ece;
     }
-    &::placeholder{
+    &::placeholder {
       font-family: cursive;
       font-weight: bold;
       font-size: 1rem;
     }
   }
-
 }
 
-.label {
-  font-size: 1rem;
-  display: block;
-}
-
-input:focus {
-  outline: none;
-}
-
-select {
-  outline: none;
-  height: 40px;
-}
-
-
+// wrapper of all columns
 .col-wrapper {
   display: flex;
   flex-direction: column;
@@ -135,25 +118,25 @@ select {
   padding: 1rem;
   background-color: $background-color;
   max-height: 60vh;
-  border-radius: .5rem;
-  &__col-header{
+  border-radius: 0.5rem;
+  &__col-header {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
     margin-top: 0;
   }
-  &__input{
-    margin-top: .5rem;
+  &__input {
+    margin-top: 0.5rem;
     border: 2px solid $disabled-color;
     caret-color: red;
     font-size: 1rem;
     padding: 1rem;
-    &:focus{
+    &:focus {
       outline: none !important;
       border: 2px solid $complete-color;
-      box-shadow: 0 0 10px #719ECE;
+      box-shadow: 0 0 10px #719ece;
     }
-    &::placeholder{
+    &::placeholder {
       font-family: cursive;
       font-weight: bold;
       font-size: 1rem;
@@ -161,6 +144,7 @@ select {
   }
 }
 
+// task
 .item {
   display: flex;
   min-height: 7vh;
@@ -173,115 +157,106 @@ select {
   background-color: white;
   width: 16rem;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
-  &__content{
-
+  &__content {
   }
-  &__title{
+  &__title {
     font-weight: 600;
     font-size: 0.8rem;
   }
-  &__status{
+  &__status {
     text-align: right;
   }
-  &__label-section{
-    padding-top:.5rem;
-
+  &__label-section {
+    padding-top: 0.5rem;
   }
-  &__label-span{
+  &__label-span {
     display: inline-block;
     padding: 0.2rem 0.5rem;
     margin: 0.1rem 0.2rem;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     text-align: center;
     color: white;
     min-width: 1rem;
   }
-  &__dl-btn{
+  &__dl-btn {
     background-color: white;
     border: 1px solid #fff;
     color: #999999;
     cursor: pointer;
-    &:hover{
+    &:hover {
       transform: scale(1.2);
-      border:1px solid red;
+      border: 1px solid red;
       transition: transform 150ms;
     }
-
   }
-  &__footer{
+  &__footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 }
 
-.delete-modal{
-  background-color: #F4F5F7;
+// delete modal
+.delete-modal {
+  background-color: #f4f5f7;
   border-radius: 2px;
   margin: 10rem 10rem 25rem 10rem;
   min-width: 15rem;
   min-height: 15rem;
-  outline:none;
+  outline: none;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  &__header{
+  &__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-  &__msg{
+  &__msg {
     align-self: center;
     font-size: 1.5rem;
-
   }
-  &__footer{
+  &__footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    ;
   }
-  &--action{
+  &--action {
     cursor: pointer;
-    padding: .4rem;
-    border-radius: .5rem;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
     font-size: 1.5rem;
     color: white;
-    border: 1px solid #cccccc ;
+    border: 1px solid #cccccc;
   }
-  &__icon{
+  &__icon {
     font-size: 1.5rem;
   }
-  &__header-txt{
+  &__header-txt {
     font-size: 2rem;
     font-weight: 600;
   }
-  &__alert{
-    margin-right: .6rem;
+  &__alert {
+    margin-right: 0.6rem;
   }
-  &__yes{
-    background-color: rgba(250,0,0,.3);
+  &__yes {
+    background-color: rgba(250, 0, 0, 0.3);
   }
-  &__no{
-    background-color: rgba(0,250,0,.3);
+  &__no {
+    background-color: rgba(0, 250, 0, 0.3);
   }
-  &__cancel{
+  &__cancel {
     border: none;
   }
 }
 
-.color-bar {
-  width: 40px;
-  height: 10px;
-  border-radius: 5px;
-}
-
+// drop wrapper of columns
 .drop-wrapper {
   //flex: 1 ;
   //width: 100%;
@@ -305,7 +280,7 @@ select {
   &::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-  &__header{
+  &__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -315,16 +290,16 @@ select {
     position: sticky;
     top: 0;
   }
-  &__header-txt{
+  &__header-txt {
     font-size: 1.2rem;
     font-weight: 600;
   }
-  &--icon{
+  &--icon {
     //padding: 0.5rem;
     cursor: pointer;
     transform: scale(1.2);
 
-    &:hover{
+    &:hover {
       transform: scale(1.6);
       transition: transform 150ms;
       color: transparent;
@@ -333,60 +308,61 @@ select {
   }
 }
 
-
+// the modal that shows details of a task
 .modal {
-  background-color: #F4F5F7;
+  background-color: #f4f5f7;
   border-radius: 2px;
   margin: 4rem 2rem;
   //min-height: 450px;
   width: 40rem;
-  outline:none;
+  outline: none;
   padding: 20px;
-  &__header{
+  &__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-  &__content{
-    display: flex ;
+  &__content {
+    display: flex;
     flex-direction: column;
   }
-  &__desc{
+  &__desc {
     padding-left: 2.4rem;
   }
-  &__status{
+  &__status {
     padding-left: 2.2rem;
   }
-  &__label-span{
-    padding: .4rem .2rem;
-    border-radius: .2rem;
+  &__label-span {
+    padding: 0.4rem 0.2rem;
+    border-radius: 0.2rem;
     margin: 0.2rem;
   }
-  &__label-labels{
+  &__label-labels {
     padding-left: 2.4rem;
     display: flex;
     flex-direction: row;
     color: white;
   }
-  &__label--add{
+  &__label--add {
     color: #555;
     border: 1px solid $complete-color;
-    padding: .4rem .2rem;
-    border-radius: .2rem;
+    padding: 0.4rem 0.2rem;
+    border-radius: 0.2rem;
     margin: 0.2rem;
     cursor: pointer;
   }
-  &__closed-btn{
+  &__closed-btn {
     background: transparent;
     cursor: pointer;
-  &:hover{
-    transform: scale(1.8);
-    transition: transform 150ms;
-  }
+    &:hover {
+      transform: scale(1.8);
+      transition: transform 150ms;
+    }
   }
 }
 
+//global overlay for all modals
 .overlay {
   display: flex;
   justify-content: center;
@@ -395,216 +371,193 @@ select {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.close-btn-ctn {
-  display: flex;
-}
-
-.close-btn {
-  height: 40px;
-  width: 35px;
-  font-size: 20px;
-  color: #031D2C;
-  border: none;
-  border-radius: 25px;
-}
-
-.close-btn:hover {
-  background-color: #DCDCDC;
-}
-
-.label-modal{
+// the modal that shows labels
+.label-modal {
   background-color: #fff;
   justify-content: space-evenly;
-  border-radius: .05rem;
-  margin: 3rem ;
+  border-radius: 0.05rem;
+  margin: 3rem;
   width: 15rem;
   //min-height: rem;
   max-height: 35rem;
   outline: none;
   padding: 1rem;
-  &__header{
+  &__header {
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid  $background-color ;
-    margin-bottom: .5rem;
-    padding-bottom: .5rem;
+    border-bottom: 2px solid $background-color;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
   }
-  &__content{
+  &__content {
     display: flex;
     flex-direction: column;
   }
-  &__input{
+  &__input {
     height: 3rem;
     outline: none;
     border: 3px solid $background-color;
-    border-radius: .3rem;
-    &::placeholder{
+    border-radius: 0.3rem;
+    &::placeholder {
       font-family: cursive;
       font-weight: bold;
       font-size: 1rem;
     }
-    &:focus{
+    &:focus {
       outline: none !important;
       border: 2px solid $complete-color;
-      box-shadow: 0 0 10px #719ECE;
+      box-shadow: 0 0 10px #719ece;
     }
-
   }
-  &__add-btn{
-    padding: .5rem;
+  &__add-btn {
+    padding: 0.5rem;
     margin-top: 1rem;
     outline: none;
     border: 3px solid $background-color;
-    border-radius: .3rem;
+    border-radius: 0.3rem;
     text-align: center;
     font-family: cursive;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
   }
-  &__item{
+  &__item {
     display: flex;
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
-    padding: .5rem;
-    margin: 0.2rem .2rem .2rem 0;
+    padding: 0.5rem;
+    margin: 0.2rem 0.2rem 0.2rem 0;
     color: #fff;
-    border-radius: .2rem;
-    &:hover{
+    border-radius: 0.2rem;
+    &:hover {
       cursor: pointer;
-      border-left: 1rem solid  opacify(transparent,0.3);
+      border-left: 1rem solid opacify(transparent, 0.3);
     }
   }
-  &__item-span{
-    flex: .8;
-    padding: .3rem;
+  &__item-span {
+    flex: 0.8;
+    padding: 0.3rem;
   }
-  &--close{
+  &--close {
     cursor: pointer;
-    &:hover{
+    &:hover {
       transform: scale(1.5);
-      transition: transform 150ms ;
+      transition: transform 150ms;
     }
   }
-  &--edit{
-    border-radius: .2rem;
+  &--edit {
+    border-radius: 0.2rem;
     cursor: pointer;
-    padding: .5rem;
-    &:hover{
+    padding: 0.5rem;
+    &:hover {
       background-color: #ccc;
     }
   }
-  &__header-txt{
+  &__header-txt {
     font-size: 1.5rem;
     font-weight: 600;
   }
 }
 
-
-.label_content{
-  margin: 2rem 0rem;
-
-}
-
-.add-label-modal{
+// the modal that would popup for adding a new label
+.add-label-modal {
   background-color: white;
   margin: 10rem 5rem 10rem 5rem;
   max-height: 20rem;
   width: 20rem;
-  outline:none;
+  outline: none;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   //justify-content: space-between;
-  &__header{
+  &__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-  &__msg{
+  &__msg {
   }
-  &__colors{
+  &__colors {
     display: grid;
-    grid-template-columns: repeat(6,1fr);
-    grid-template-rows: repeat(3,1fr);
-    grid-gap: .3rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 0.3rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-  &__single-color{
+  &__single-color {
     padding: 1rem;
-    margin-right: .2rem;
-    border-radius: .2rem;
+    margin-right: 0.2rem;
+    border-radius: 0.2rem;
     color: white;
-    &:hover{
+    &:hover {
       transform: scale(1.8);
       transition: transform 150ms;
       cursor: pointer;
     }
   }
-  &__header-txt{
+  &__header-txt {
     font-size: 1.5rem;
     font-weight: bold;
   }
-  &--action{
+  &--action {
     cursor: pointer;
-    padding: .4rem;
-    border-radius: .5rem;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
     font-size: 1.5rem;
     color: white;
   }
   &--add-btn {
-    padding: .6rem;
-    border-radius: .5rem;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
     font-size: 1.4rem;
     color: white;
-    border: 1px solid #cccccc ;
+    border: 1px solid #cccccc;
     background-color: $complete-color;
   }
   &__cancel {
     border: none;
   }
-  &__input{
-    padding: .5rem;
+  &__input {
+    padding: 0.5rem;
     outline: none;
     border: 3px solid $background-color;
-    border-radius: .3rem;
-    &::placeholder{
+    border-radius: 0.3rem;
+    &::placeholder {
       font-family: cursive;
       font-weight: bold;
       font-size: 1rem;
     }
-    &:focus{
+    &:focus {
       outline: none !important;
       border: 2px solid $complete-color;
-      box-shadow: 0 0 10px #719ECE;
+      box-shadow: 0 0 10px #719ece;
     }
-
   }
-  &--dl-btn{
-    padding: .6rem;
-    border-radius: .5rem;
+  &--dl-btn {
+    padding: 0.6rem;
+    border-radius: 0.5rem;
     border: 2px solid $background-color;
     cursor: pointer;
   }
 }
 
-
-.btn-change-direction{
+// the button that changes the direction of boards
+.btn-change-direction {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 3rem;
   height: 3rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: $background-color;
   text-align: center;
   margin-left: 2rem;
@@ -613,10 +566,15 @@ select {
   font-size: 2rem;
   visibility: hidden;
 }
+.color-bar {
+  width: 40px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+// if is a phone show the direction button
 @media only screen and (max-width: 480px) {
-  .btn-change-direction{
+  .btn-change-direction {
     visibility: visible;
   }
 }
-
-
