@@ -3,7 +3,7 @@ const Header = () => {
     return(
         <div className="header">
             <p className="header__inner">
-                task management!
+                task management 📝!
             </p>
         </div>
     )

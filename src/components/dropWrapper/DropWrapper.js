@@ -36,14 +36,15 @@ const DropWrapper = ({ onDrop, children, column, addNewItem, deleteColumn }) => 
     }
 
     return (
-        <div ref={drop} className={"drop-wrapper"}>
-            <div className="drop-wrapper__header">
-                <p className="drop-wrapper__header-txt">{column.status.toUpperCase()}</p>
-                <span className={"drop-wrapper--icon"} onClick={showPopup}>🗑️</span>
-            <Popup incomingFunction={deleteColumn} incomingArg={column.status} show={riseDeletePopup} closePopUp={closePopup}/>
+        <>
+            <div ref={drop} className={"drop-wrapper"}>
+                <div className="drop-wrapper__header">
+                    <p className="drop-wrapper__header-txt">{column.status.toUpperCase()}</p>
+                    <span className={"drop-wrapper--icon"} onClick={showPopup}>🗑️</span>
+                    <Popup incomingFunction={deleteColumn} incomingArg={column.status} show={riseDeletePopup} closePopUp={closePopup}/>
+                </div>
+                {React.cloneElement(children, { isOver })}
             </div>
-
-            {React.cloneElement(children, { isOver })}
             <div className={'content__add-area'}>
                 <textarea
                     name={`text}`}
@@ -54,10 +55,10 @@ const DropWrapper = ({ onDrop, children, column, addNewItem, deleteColumn }) => 
                     onKeyDown={(e) => addIt(e)}
                     placeholder={"+ write and hit enter"}
                     className={"content__input"}
-
                 />
             </div>
-        </div>
+        </>
+
     )
 };
 

@@ -19,7 +19,6 @@ const Container = () => {
     })
     // saving data whenever tasks changes
     useEffect(() => {
-        console.log('saving => ', JSON.stringify(items))
         localStorage.setItem('items', JSON.stringify(items));
 
 
@@ -34,15 +33,12 @@ const Container = () => {
     useEffect(() => {
 
         const items = JSON.parse(localStorage.getItem('items'));
-        console.log('reading => ', items)
 
         if (items.length) {
-            console.log(items)
             setItems(items);
         }
     }, []);
     useEffect(() => {
-        console.log('saving => ', JSON.stringify(items))
         localStorage.setItem('items', JSON.stringify(items));
 
     }, [items]);
@@ -50,9 +46,7 @@ const Container = () => {
     // loading statuses form local storage into state
     useEffect(() => {
         const itemsColumn = JSON.parse(localStorage.getItem('columns'));
-        console.log('reading => ', itemsColumn)
         if (statuses.length) {
-            console.log(itemsColumn)
             setTheColumns(itemsColumn);
         }
     }, []);
@@ -64,7 +58,6 @@ const Container = () => {
             if (items[i].id === updatedItem.id)
                 index = i;
         }
-        console.log(index)
 
         setItems( prevState => {
             const newItems = prevState;
@@ -99,7 +92,6 @@ const Container = () => {
         )
     }
     const addNewItem = (text, col) => {
-        console.log(status)
         let lastId = 1;
         items.forEach(i=>{
             if (i.id > lastId)
@@ -120,7 +112,7 @@ const Container = () => {
     const addItemsColumn = (e) => {
         if (e.key ==='Enter'){
             if(newColumn.status.trim())
-                setNewColumn({...newColumn, status:"New Item" })
+                setNewColumn({...newColumn,status:"New Item" })
             if (!theColumns.filter(i => i.status === newColumn.status).length)
                 setTheColumns(prevState => [...prevState.concat(newColumn)])
             else {
@@ -138,7 +130,7 @@ const Container = () => {
 
             {theColumns.map(col=>{
                 return(
-                    <div key={col.status } className={'col-wrapper'}>
+                    <div key={col.status } className={'col-wrapper'} >
                         <DropWrapper onDrop={onDrop} column={col} addNewItem={addNewItem} deleteColumn={deleteColumn} >
                             <Column addNewItem={addNewItem}>
                                 {items.filter(i => i.status === col.status)
@@ -157,7 +149,7 @@ const Container = () => {
                      value={newColumn.status}
                      onChange={(e) => setNewColumn({...newColumn,status: e.target.value})}
                      onKeyDown={(e) => addItemsColumn(e)}
-                     placeholder={"+ add column"}
+                     placeholder={" add column"}
                      className={"col-wrapper__input"}
 
                  />

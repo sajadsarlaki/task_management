@@ -20,7 +20,7 @@ const Popup = ({incomingFunction,incomingArg, show, closePopUp}) => {
             </p>
             <div className={'delete-modal__footer'}>
                 <span className={'delete-modal--action delete-modal__no'} onClick={closePopUp}>No <span className={'delete-modal__icon '}> 🙅‍♂️</span></span>
-                <span className={'delete-modal--action delete-modal__yes'} onClick={() => incomingFunction(incomingArg)}>Yes <span className={'delete-modal__icon '}>fe</span></span>
+                <span className={'delete-modal--action delete-modal__yes'} onClick={() => incomingFunction(incomingArg)}>Yes <span className={'delete-modal__icon '}>🤷</span></span>
             </div>
         </Modal>
     )
