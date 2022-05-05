@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Modal from 'react-modal'
 
 Modal.setAppElement('#root');
+
+const colorList = ["red","yellow","blue","green","purple"]
 
 const LabelAddModal = ({
                     addNewLabel,
@@ -13,7 +15,9 @@ const LabelAddModal = ({
                     editLabel
                }) => {
 
-    const colorList = ["red","yellow","blue","green","purple"]
+    console.log(prevState)
+
+
     const [selectedColor, setSelectedColor] = useState(mode?'':prevState.color);
     const [name, setName] = useState(mode?'':prevState.name);
     console.log(name);
@@ -41,6 +45,12 @@ const LabelAddModal = ({
             color:selectedColor
         }
         editLabel(prevState, currentLabel);
+        onLabelModalClosed()
+    }
+
+    const handleDelete = () => {
+        deleteLabel(prevState)
+        onLabelModalClosed()
     }
     return (
         <Modal
@@ -78,8 +88,8 @@ const LabelAddModal = ({
                     Ok</span>
 
                 {!mode?
-                    <span className={'add-label-modal--delete-btn'}
-                      onClick={() => deleteLabel(prevState)}
+                    <span className={'add-label-modal--dl-btn'}
+                      onClick={handleDelete }
                 >remove</span> : ''}
 
             </div>

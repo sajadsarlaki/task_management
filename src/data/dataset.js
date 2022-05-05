@@ -10,19 +10,25 @@ const data = [{
     icon: "⭕️",
     status: "open",
     title: "Purchase present",
-    content: "Get an anniversary gift"
+    content: "Get an anniversary gift",
+    labels:[]
+
 }, {
     id: 3,
     icon: "⭕️",
     status: "open",
     title: "Invest in investments",
-    content: "Call the bank to talk about investments"
+    content: "Call the bank to talk about investments",
+    labels:[]
+
 }, {
     id: 4,
     icon: "⭕️",
     status: "open",
     title: "Daily reading",
-    content: "Finish reading Intro to UI/UX"
+    content: "Finish reading Intro to UI/UX",
+    labels:[]
+
 }];
 
 const statuses = [{
@@ -45,10 +51,10 @@ const statuses = [{
 ];
 
 const labels = [
-    { name: 'Andy', color:'#fd2'  },
-    { name: 'Bob',  color:'red'},
-    { name: 'Tom Hulk', color:'#090'},
-    { name: 'Tom Hank', color:'#009' },
+    { name: 'done', color:'#fd2'  },
+    { name: 'important',  color:'red'},
+    { name: 'started', color:'#090'},
+    { name: 'delay', color:'#009' },
 ];
 
 // save to localStorage

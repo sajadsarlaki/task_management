@@ -105,7 +105,8 @@ const Container = () => {
             icon: col.icon,
             status: col.status,
             title: "Daily reading",
-            content: text
+            content: text,
+            labels:[]
         }
         setItems([...items,newTask])
     }

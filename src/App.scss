@@ -498,5 +498,11 @@ select {
     }
 
   }
+  &--dl-btn{
+    padding: .6rem;
+    border-radius: .5rem;
+    border: 2px solid $background-color;
+    cursor: pointer;
+  }
 }
 

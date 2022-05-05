@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
-// This holds a list of some fiction people
-// Some  have the same name but different age and id
 import {labels} from "../../data/dataset";
 import LabelAddModal from "./LabelAddModal";
 
@@ -14,6 +12,7 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     const [editAddLabelModal, setEditAddLabelModal] = useState(false);
     const onLabelModalClosed = () =>{setEditAddLabelModal(false)}
     const onLabelModalOpen = () =>{setEditAddLabelModal(true)}
+
     // mode 0 for edit , mode 1 for add
     const [mode, setMode] = useState(0);
 
@@ -42,7 +41,7 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
             newItem.labels = [];
 
         if(item.labels.includes(labelItem)){
-            item.labels = item.labels.filter(i=>i.name !== labelItem.name && i.color !== labelItem.color);
+            item.labels = item.labels.filter(i=>i.name !== labelItem.name || i.color !== labelItem.color);
             updateItem(newItem);
             return
         }
@@ -61,9 +60,17 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
     }
 
     const deleteLabel = (labelItem) => {
-        item.labels = item.labels.filter(i=>i.name !== labelItem.name && i.color !== labelItem.color);
-        updateItem(item)
-        onLabelsModalClose()
+        setFoundLabels(prevState => {
+         return   [...prevState.filter(i => i.name !== labelItem.name || i.color !== labelItem.color)]
+        })
+        //
+        for (let i = 0; i < item.labels.length; i++) {
+            if ( item.labels[i].name === labelItem.name &&  item.labels[i].color === labelItem.color )
+                item.labels.splice(i,1);
+            updateItem(item)
+            onLabelsModalClose()
+
+        }
     }
 
     const editLabel = (prev, current) => {
@@ -80,7 +87,12 @@ function Label({item, onLabelsModalClose, showLabels, updateItem}) {
             }
             return([...prevState])
         })
-        onLabelsModalClose()
+        for (let i = 0; i < item.labels.length; i++) {
+            if ( item.labels[i].name === prev.name &&  item.labels[i].color === prev.color )
+                item.labels[i] = current;
+        }
+
+
     }
 
     const handleEditLabel = (labelItem) => {
